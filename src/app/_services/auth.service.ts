@@ -3,22 +3,21 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 
 import {map, catchError} from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, of } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
-
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = "https://localhost:5001/api/auth"
+  //  dotnet watch run --urls http://0.0.0.0:5001
+  //  dotnet watch run --urls http://0.0.0.0:5001
+  //  baseUrl = "https://localhost:5001/api/auth"
+  baseUrl = "http://192.168.50.95:5001/api/auth"
   userToken: any; 
   decodedToken: any;
   user: any;
 
-  
   constructor(private NewHttp : HttpClient, private http: Http) { }
 
   login(model:any){
@@ -57,7 +56,7 @@ export class AuthService {
     }
 
     loggedIn(){
-      // TODO: refactor service is constanlty bieng called on *ngIf to dispplay header
+      // TODO: refactor; service is constanlty bieng called on *ngIf to dispplay 
       this.userToken = localStorage.getItem('token');
       const helper = new JwtHelperService();
       const isExpired = helper.isTokenExpired(this.userToken);
@@ -74,19 +73,17 @@ export class AuthService {
     }
 
     private HandleError(error:any){
-
+      console.log(error);
       const err = error.error;
       var errorMessage = "";
-      //console.log(err)
-      
-      if(typeof err === 'object')
+      if(err === null){
+        errorMessage = "Invalid Login";
+      }else
       {
-        errorMessage = "";
         for (var property in err) {
           errorMessage = errorMessage + err[property] + '\n';
         }
-      } else errorMessage = err;
-
+      } 
       return throwError(errorMessage);
     }
 }
