@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   constructor(private http: HttpClient, private handleError: ErrorHandlerService ) { }
 
   ngOnInit() {
-   this.getValues();
+   //this.getValues();
  
   }
 
@@ -23,13 +23,13 @@ export class HomeComponent implements OnInit {
     this.registerMode = true;
   }
 
-  getValues(){
+  // getValues(){
     
-    this.http.get("http://localhost:5000/api/values")
-    .subscribe(response => {
-      this.values = response;
-    }, err => console.log(err));
-  }
+  //   this.http.get("http://localhost:5000/api/values")
+  //   .subscribe(response => {
+  //     this.values = response;
+  //   }, err => console.log(err));
+  // }
 
   cancelRegisterMode(registerMode: boolean){
     this.registerMode = registerMode;

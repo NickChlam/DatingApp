@@ -12,8 +12,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
   //  dotnet watch run --urls http://0.0.0.0:5001
   //  dotnet watch run --urls http://0.0.0.0:5001
-  //  baseUrl = "https://localhost:5001/api/auth"
-  baseUrl = "http://192.168.50.95:5001/api/auth"
+  baseUrl = "https://localhost:5001/api/auth"
+  //baseUrl = "http://192.168.50.95:5001/api/auth"
   userToken: any; 
   decodedToken: any;
   user: any;

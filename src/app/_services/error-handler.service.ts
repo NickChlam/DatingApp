@@ -10,7 +10,7 @@ export class ErrorHandlerService {
 
   constructor() { }
 
-  public handleError(error: HttpErrorResponse) {
+  public ManageError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
@@ -26,4 +26,20 @@ export class ErrorHandlerService {
     return throwError(
       'Something bad happened; please try again later.' );
   };
+
+  
+  public HandleError(error:any){
+    console.log(error);
+    const err = error.error;
+    var errorMessage = "";
+    if(err === null){
+      errorMessage = "Invalid Login";
+    }else
+    {
+      for (var property in err) {
+        errorMessage = errorMessage + err[property] + '\n';
+      }
+    } 
+    return throwError(errorMessage);
+  }
 }
