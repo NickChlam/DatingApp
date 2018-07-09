@@ -12,11 +12,14 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       
+      <!-- member links if logged in  -->
       <ul class="nav navbar-nav" *ngIf="loggedIn()">
         <li routerLinkActive="router-link-active"><a [routerLink]="['/members']" >Matches</a></li>
         <li routerLinkActive="router-link-active"><a [routerLink]="['/lists']"   >Lists</a></li>
         <li routerLinkActive="router-link-active"><a [routerLink]="['/messages']">Messages</a></li>
       </ul>
+
+      <!-- login form if not logged in  -->
       <form *ngIf="!loggedIn()" #loginForm="ngForm" class="navbar-form navbar-right" (ngSubmit)="login()">
         <div class="form-group">
           <input type="text" #UserName="ngModel" placeholder="Email" class="form-control" required name="UserName" [(ngModel)]="model.UserName">
@@ -27,12 +30,13 @@
         <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Sign In </button>
       </form>
 
+      <!-- toggle dropdown if logged in  -->
       <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
        
         <li class="dropdown" dropdown>
           <a class="dropdown-toggle" dropdownToggle> {{ auth.decodedToken?.unique_name | titlecase }}<span class="caret"></span></a>
           <ul class="dropdown-menu" *dropdownMenu>
-            <li><a ><i class="fa fa-user"></i>  Edit Profile</a></li>
+            <li><a [routerLink]="['/members/edit']" routerLinkActive="router-link-active"  ><i class="fa fa-user"></i>  Edit Profile</a></li>
             <li role="separator" class="divider"></li>
             <li routerLinkActive="router-link-active"><a (click)="logout()"   ><i class="fa fa-sign-out"></i> Logout </a></li>
           </ul>
