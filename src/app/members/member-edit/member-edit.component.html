@@ -14,7 +14,7 @@
         <div class="col-sm-4">
             <!-- panel for user detail -->
             <div class="panel panel-default">   
-                <img src="{{ user.photoUrl }}" alt="{{ user.knownAs }}" class="profile-img thumbnail">
+                <img src="{{ photoUrl }}" alt="{{ user.knownAs }}" class="profile-img thumbnail">
                 <div class="panel-body">
                     <div>
                         <strong>Location: </strong>
@@ -37,7 +37,7 @@
                 <!-- footer with buttons -->
                 <div class="panel-footer">
                     <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save</button>
-                    this.
+                    
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                         <h4> I'm looking for</h4>
                         <p> <textarea name="lookingFor" rows="6" class="form-control" [(ngModel)]="user.lookingFor"></textarea></p>
                         <h4> Interests</h4>
-                        <p> <textarea name="imterests" rows="6" class="form-control" [(ngModel)]="user.interests"></textarea></p>
+                        <p> <textarea name="interests" rows="6" class="form-control" [(ngModel)]="user.interests"></textarea></p>
                         
                         <h4>Location Details</h4>
                         <div class="form-inline" >
@@ -72,7 +72,8 @@
                     </tab>
                   
                     <tab heading="Edit Photos">
-                        <p>TODO: edit photos here </p>
+                            <app-photo-edit [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"> </app-photo-edit>
+                   
                     </tab>
                 </tabset>
             </div>

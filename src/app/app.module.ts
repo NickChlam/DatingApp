@@ -1,7 +1,7 @@
 // @angular modules 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule} from '@angular/http';
 
@@ -18,8 +18,9 @@ import { ErrorHandlerService} from './_services/error-handler.service';
 import { AlertifyService} from './_services/alertify.service';
 
 // 3rd Part Modules
-import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
 
 // components
 import { AppComponent } from './app.component';
@@ -32,13 +33,12 @@ import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { NavComponent } from './nav/nav.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { PhotoEditComponent } from './members/photo-edit/photo-edit.component';
 
 // resolvers
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
-
-
 
 
 @NgModule({
@@ -52,18 +52,22 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
     MessagesComponent,
     MemberCardComponent,
     MemberDetailComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditComponent
     
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule, 
+    ReactiveFormsModule, 
     HttpModule,
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     TabsModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    FileUploadModule
   ],
   providers: [
     AuthService,

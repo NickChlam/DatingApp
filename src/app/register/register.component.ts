@@ -1,6 +1,11 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService} from '../_services/alertify.service';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { User } from '../_models/Users';
+import { Router } from '@angular/router';
+
 
 
 
@@ -10,21 +15,61 @@ import { AlertifyService} from '../_services/alertify.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-model: any = {};
-
+user: User;
+registerForm : FormGroup;
+bsConfig: Partial<BsDatepickerConfig>;
+ 
+  
 @Output() cancelRegister = new EventEmitter();
 
-  constructor(private authService: AuthService, private Alertify: AlertifyService) { }
+  constructor(private authService: AuthService, private Alertify: AlertifyService, private fb : FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.bsConfig = {
+      containerClass: 'theme-red'
+    };
+    this.createRegisterForm();
+
+    // Another way to use FormGroup 
+    // this.registerForm = new FormGroup({
+    //   username: new FormControl('', Validators.required),
+    //   password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]), 
+    //   confirmPassword: new FormControl('', Validators.required)
+    // }, this.passwordMatchValidator);
+  }
+
+  createRegisterForm(){
+    this.registerForm = this.fb.group({
+      gender: ['male'],
+      username: ['', Validators.required ],
+      knownAs: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      confirmPassword: ['', Validators.required]
+    }, {validator: this.passwordMatchValidator});
+  }
+
+  passwordMatchValidator(g: FormGroup){
+    return g.get('password').value === g.get('confirmPassword').value ? null : {'mismatch': true};
   }
 
   register(){
-    this.authService.register(this.model).subscribe( () => {
-       this.Alertify.success("Succesfully Registered");
-    }, err => {
-      this.Alertify.error(err)
-    });
+    if(this.registerForm.valid){
+      this.user = Object.assign({}, this.registerForm.value)
+      this.authService.register(this.user).subscribe(() => {
+        this.Alertify.success("Registration successful");
+      }, error => {
+        this.Alertify.error(error);
+      }, () => {
+        this.authService.login(this.user).subscribe(() => {
+          // redirect to members page
+          this.router.navigate(['/members']);
+        })
+      })
+    }
+   
   }
 
   cancel(){

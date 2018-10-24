@@ -30,10 +30,15 @@
         <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Sign In </button>
       </form>
 
+     
       <!-- toggle dropdown if logged in  -->
       <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
-       
-        <li class="dropdown" dropdown>
+        
+          <span>
+              <img [src]="photoUrl" class="img-thumbnail img-fluid img-responsive thumbnail"alt="">
+            </span>
+          <li class="dropdown" dropdown>
+          
           <a class="dropdown-toggle" dropdownToggle> {{ auth.decodedToken?.unique_name | titlecase }}<span class="caret"></span></a>
           <ul class="dropdown-menu" *dropdownMenu>
             <li><a [routerLink]="['/members/edit']" routerLinkActive="router-link-active"  ><i class="fa fa-user"></i>  Edit Profile</a></li>
