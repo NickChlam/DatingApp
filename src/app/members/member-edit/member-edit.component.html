@@ -9,12 +9,12 @@
           </div>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-sm-4">
             <!-- panel for user detail -->
             <div class="panel panel-default">   
-                <img src="{{ photoUrl }}" alt="{{ user.knownAs }}" class="profile-img thumbnail">
+                <img src="{{ photoUrl || '../../../assets/user.png' }}" alt="{{ user.KnownAs }}" class="profile-img thumbnail">
                 <div class="panel-body">
                     <div>
                         <strong>Location: </strong>

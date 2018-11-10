@@ -9,12 +9,14 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class MemberListResolver implements Resolve<User[]>
 {
+    pageNumber = 1;
+    pageSize = 30;
     constructor(private userService: UserService,
         private router: Router, 
         private Alertify: AlertifyService ){}
 
         resolve(route:ActivatedRouteSnapshot): Observable<User[]>{
-            return this.userService.getUsers()
+            return this.userService.getUsers(this.pageNumber, this.pageSize)
                 .pipe(
                     catchError( error => {
                         this.Alertify.error(error);

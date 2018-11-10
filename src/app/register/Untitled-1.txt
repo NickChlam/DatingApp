@@ -1,0 +1,7 @@
+</VirtlHost *:80>
+        ProxyPreserveHost On
+        ProxyPass / http://127.0.0.1:5001/
+        ProxyPassReverse / http://127.0.0.1:5000/
+        ErrorLog /var/log/httpd/hellomvc-access.log
+        CustomLog /var/log/httpd/hellomvc-access.log common
+</VirtualHost>

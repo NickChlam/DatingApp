@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand"  [routerLink]="['/home']" routerLinkActive="router-link-active" >Dating App</a>
+      <a class="navbar-brand"  [routerLink]="['/home']" routerLinkActive="router-link-active" >With The Right Person </a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       
@@ -35,7 +35,7 @@
       <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
         
           <span>
-              <img [src]="photoUrl" class="img-thumbnail img-fluid img-responsive thumbnail"alt="">
+              <img [src]="photoUrl || '../../../assets/user.png' " class="img-thumbnail img-fluid img-responsive thumbnail"alt="">
             </span>
           <li class="dropdown" dropdown>
           
