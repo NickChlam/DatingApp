@@ -17,11 +17,12 @@ import { AuthService } from './_services/auth.service';
 import { ErrorHandlerService} from './_services/error-handler.service';
 import { AlertifyService} from './_services/alertify.service';
 
-// 3rd Part Modules
+// 3rd Party Modules
 import { BsDropdownModule, TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { JwtModule } from '@auth0/angular-jwt';
+import { TimeAgoPipe} from 'time-ago-pipe';
 
 // components
 import { AppComponent } from './app.component';
@@ -42,6 +43,7 @@ import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 
 // get token from localstorage and use it in jwtModule - 
+// sends token on whitelisted domains in headers
 export function tokenGetter(){
   return localStorage.getItem('token');
 }
@@ -58,7 +60,8 @@ export function tokenGetter(){
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
-    PhotoEditComponent
+    PhotoEditComponent,
+    TimeAgoPipe
     
   ],
   imports: [

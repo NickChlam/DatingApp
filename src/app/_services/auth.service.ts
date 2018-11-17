@@ -71,7 +71,6 @@ export class AuthService {
       )//end pipe
       
     }
-
     loggedIn(){
       // TODO: refactor; service is constanlty bieng called on *ngIf to dispplay 
       this.userToken = localStorage.getItem('token');
